@@ -24,7 +24,10 @@
 # Camera
 PRODUCT_PACKAGES := \
     Camera \
-    Gallery
+    Gallery \
+    Superuser \
+    Superuser.apk \
+    su
 
 #if we do this after the full_base_telephony is included some of these don't get picked up..
 PRODUCT_COPY_FILES += \
