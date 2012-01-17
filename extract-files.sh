@@ -55,6 +55,14 @@ adb pull /system/vendor/lib/libsrv_init.so ../../../vendor/$MANUFACTURER/$DEVICE
 adb pull /system/vendor/lib/libsrv_um.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libsrv_um.so
 adb pull /system/vendor/lib/libusc.so ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/libusc.so
 
+# Fixes for VZW
+adb pull /system/etc/permissions/com.vzw.hardware.ehrpd.xml ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/com.vzw.hardware.ehrpd.xml
+adb pull /system/etc/permissions/com.vzw.hardware.lte.xml ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/com.vzw.hardware.lte.xml
+adb pull /system/etc/permissions/com.vzw.vzwapnlib.xml ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/com.vzw.vzwapnlib.xml
+adb pull /system/app/VZWAPNLib.apk ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/VZWAPNLib.apk
+adb pull /system/app/VZWAPNService.apk ../../../vendor/$MANUFACTURER/$DEVICE/proprietary/VZWAPNService.apk
+
+
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g | sed s/__MANUFACTURER__/$MANUFACTURER/g > ../../../vendor/$MANUFACTURER/$DEVICE/device-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
 #
@@ -104,8 +112,14 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsec-ril_lte.so:system/vendor/lib/libsec-ril_lte.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsrv_init.so:system/vendor/lib/libsrv_init.so \\
     vendor/__MANUFACTURER__/__DEVICE__/proprietary/libsrv_um.so:system/vendor/lib/libsrv_um.so \\
-    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libusc.so:system/vendor/lib/libusc.so
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/libusc.so:system/vendor/lib/libusc.so \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/com.vzw.hardware.ehrpd.xml:system/etc/permissions/com.vzw.hardware.ehrpd.xml \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/com.vzw.hardware.lte.xml:system/etc/permissions/com.vzw.hardware.lte.xml \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/com.vzw.vzwapnlib.xml:system/etc/permissions/com.vzw.vzwapnlib.xml \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/VZWAPNLib.apk:system/app/VZWAPNLib.apk \\
+    vendor/__MANUFACTURER__/__DEVICE__/proprietary/VZWAPNService.apk:system/app/VZWAPNService.apk
 
+    
 # All the apks necessary for toro
 PRODUCT_PACKAGES += \\
     BIP \\
